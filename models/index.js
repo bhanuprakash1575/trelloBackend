@@ -6,10 +6,21 @@ import customModel from "./custom.model.js";
 import checkitemsModel from "./checkitems.model.js";
 import customModel2 from "./custom.model2.js";
 
-const sequelize = new Sequelize(dbConfig.db, dbConfig.user, dbConfig.password, {
-  host: dbConfig.host,
-  dialect: dbConfig.dialect,
-  logging: false,
+// const sequelize = new Sequelize(dbConfig.db, dbConfig.user, dbConfig.password, {
+//   host: dbConfig.host,
+//   dialect: dbConfig.dialect,
+//   logging: false,
+// });
+
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
+  dialect: 'postgres',
+  protocol: 'postgres',
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false
+    }
+  }
 });
 
 const db = {};
