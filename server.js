@@ -1,13 +1,13 @@
 import express from "express";
 import cors from "cors";
 import morgan from "morgan";
-
+import dotenv from 'dotenv'
 import logger from "./logger.js";
 import userRouter from "./routes/user.routes.js";
 import apiRouter from "./routes/api.routes.js";
 import db from "./models/index.js";
 import authenticateUser from "./middlewares/authenticateUser.js";
-
+dotenv.config()
 const app = express();
 
 const morganFormat = ":method :url :status :response-time ms";
@@ -65,7 +65,7 @@ app.use(authenticateUser);
 app.use("/api", apiRouter);
 
 // set port, listen for requests
-const PORT = 8081;
+const PORT = process.env.PORT || 8081;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
