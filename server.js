@@ -54,6 +54,10 @@ app.use(express.urlencoded({ extended: true }));
 
 // simple route
 
+app.get('/',(req,res)=>{
+  res.send('Welcome')
+})
+
 app.use("/user", userRouter);
 
 app.use(authenticateUser);
