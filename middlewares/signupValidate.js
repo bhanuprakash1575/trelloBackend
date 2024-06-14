@@ -22,7 +22,7 @@ async function signUpvalidate(req, res, next) {
     req.user = { name: req.body.username, password: hashedPassword };
     next();
   } catch (error) {
-    console.error(err);
+    console.log(error);
     res.status(500).json({ message: "Internal server error" });
   }
 
