@@ -1530,3 +1530,4 @@
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/boards\",\"status\":\"304\",\"responseTime\":\"4.549\"}","timestamp":"2024-06-14T10:13:40.249Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/user/signup\",\"status\":\"400\",\"responseTime\":\"23.379\"}","timestamp":"2024-06-14T11:02:34.422Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/user/signup\",\"status\":\"400\",\"responseTime\":\"9.524\"}","timestamp":"2024-06-14T11:03:12.168Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/user/signup\",\"status\":\"400\",\"responseTime\":\"15.990\"}","timestamp":"2024-06-14T11:09:03.012Z"}
