@@ -21,10 +21,12 @@ db.sequelize
     console.log("Failed to sync db: " + err.message);
   });
 
-var corsOptions = {
+let corsOptions = {
   origin: "*",
   optionsSuccessStatus: 200,
 };
+
+
 app.use(
   morgan(morganFormat, {
     skip: function (req, res) {
