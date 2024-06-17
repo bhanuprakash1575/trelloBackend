@@ -1,16 +1,50 @@
 import express from "express";
 import cors from "cors";
 import morgan from "morgan";
-import dotenv from 'dotenv'
+import dotenv from "dotenv";
+import swaggerJSDoc from "swagger-jsdoc";
+import swaggerUi from "swagger-ui-express";
 import logger from "./logger.js";
 import userRouter from "./routes/user.routes.js";
 import apiRouter from "./routes/api.routes.js";
 import db from "./models/index.js";
 import authenticateUser from "./middlewares/authenticateUser.js";
-dotenv.config()
+
+dotenv.config();
+
 const app = express();
 
-const morganFormat = ":method :url :status :response-time ms";
+const options = {
+  definition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'Trello Backend API',
+      version: '1.0.0',
+    },
+    servers: [
+      {
+        url: 'https://trellobackend.up.railway.app/api',
+      },
+    ],
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+        },
+      },
+    },
+    security: [
+      {
+        bearerAuth: [],
+      },
+    ],
+  },
+  apis: ['./routes/*.js'], // Path to the API docs
+};
+
+const swaggerSpec = swaggerJSDoc(options);
 
 db.sequelize
   .sync()
@@ -21,12 +55,7 @@ db.sequelize
     console.log("Failed to sync db: " + err.message);
   });
 
-let corsOptions = {
-  origin: "*",
-  optionsSuccessStatus: 200,
-};
-
-
+const morganFormat = ":method :url :status :response-time ms";
 app.use(
   morgan(morganFormat, {
     skip: function (req, res) {
@@ -46,7 +75,12 @@ app.use(
   })
 );
 
+let corsOptions = {
+  origin: "*",
+  optionsSuccessStatus: 200,
+};
 app.use(cors(corsOptions));
+
 
 // parse requests of content-type - application/json
 app.use(express.json());
@@ -56,8 +90,11 @@ app.use(express.urlencoded({ extended: true }));
 
 // simple route
 
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 app.get('/',(req,res)=>{
-  return res.send('Welcome')
+  return res.send('welcome')
 })
 
 app.use("/user", userRouter);
@@ -71,3 +108,4 @@ const PORT = process.env.PORT || 8081;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
+

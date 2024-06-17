@@ -29,3 +29,4 @@ async function signUpvalidate(req, res, next) {
 }
 
 export { signUpvalidate };
+

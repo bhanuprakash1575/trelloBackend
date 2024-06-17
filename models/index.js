@@ -5,6 +5,8 @@ import boardsModel from "./boards.model.js";
 import customModel from "./custom.model.js";
 import checkitemsModel from "./checkitems.model.js";
 import customModel2 from "./custom.model2.js";
+import dotenv from 'dotenv'
+dotenv.config()
 
 // const sequelize = new Sequelize(dbConfig.db, dbConfig.user, dbConfig.password, {
 //   host: dbConfig.host,
@@ -12,9 +14,10 @@ import customModel2 from "./custom.model2.js";
 //   logging: false,
 // });
 
-const sequelize = new Sequelize(process.env.DATABASE_URL, {
+const sequelize = new Sequelize('postgresql://postgres:ruyeTztNvfiLqlPaDcUtzbnsRVzlgpDC@monorail.proxy.rlwy.net:50046/railway', {
   dialect: 'postgres',
   protocol: 'postgres',
+  logging : false,
   dialectOptions: {
     ssl: {
       require: true,

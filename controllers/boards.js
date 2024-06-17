@@ -25,7 +25,6 @@ const createBoard = async (req, res) => {
     });
     return res.status(200).send(data);
   } catch (error) {
-    console.log("incatch");
     console.log(error);
     return res.status(500).json({ message: "internal server error" });
   }
@@ -34,7 +33,7 @@ const createBoard = async (req, res) => {
 const deleteBoard = async (req, res) => {
   const id = req.params.id;
   if (!id) {
-    res.status(400).send({ message: "Invalid BoardId" });
+    res.status(400).json({ message: "Invalid BoardId" });
     return;
   }
   try {
@@ -45,7 +44,6 @@ const deleteBoard = async (req, res) => {
     });
     return res.sendStatus(200);
   } catch (error) {
-    console.log("incatch");
     console.log(error);
     return res.status(500).json({ message: "internal server error" });
   }
