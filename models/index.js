@@ -1,5 +1,4 @@
 import Sequelize from "sequelize";
-import dbConfig from "../config/db.config.js";
 import userModel from "./users.model.js";
 import boardsModel from "./boards.model.js";
 import customModel from "./custom.model.js";
@@ -14,7 +13,7 @@ dotenv.config()
 //   logging: false,
 // });
 
-const sequelize = new Sequelize('postgresql://postgres:ruyeTztNvfiLqlPaDcUtzbnsRVzlgpDC@monorail.proxy.rlwy.net:50046/railway', {
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
   dialect: 'postgres',
   protocol: 'postgres',
   logging : false,
